@@ -223,7 +223,7 @@ LOCAL_SRC_FILES += \
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -gt 25; echo $$?),0)
 # Android 8.0 had some tools in different paths
 LOCAL_SRC_FILES += \
-    toys/pending/dmesg.c \
+    toys/lsb/dmesg.c \
     toys/net/ftpget.c
 else
 LOCAL_SRC_FILES += \
@@ -265,7 +265,8 @@ LOCAL_SRC_FILES += \
     toys/net/netstat.c \
     toys/net/rfkill.c \
     toys/net/tunctl.c \
-    toys/pending/chrt.c \
+    toys/other/chrt.c \
+    toys/pending/gzip.c \
     toys/pending/getfattr.c \
     toys/pending/modprobe.c \
     toys/pending/setfattr.c \
@@ -294,7 +295,7 @@ LOCAL_SRC_FILES += \
 endif
 
 LOCAL_CFLAGS += \
-    -std=c99 \
+    -std=gnu11 \
     -Os \
     -Wno-char-subscripts \
     -Wno-sign-compare \
@@ -310,7 +311,7 @@ LOCAL_CFLAGS += -DTOYBOX_VERSION='"$(toybox_version)"'
 
 LOCAL_CLANG := true
 
-LOCAL_SHARED_LIBRARIES += libcutils libselinux
+LOCAL_SHARED_LIBRARIES += libcutils libselinux libz
 
 LOCAL_MODULE := toybox_recovery
 LOCAL_MODULE_STEM := toybox
