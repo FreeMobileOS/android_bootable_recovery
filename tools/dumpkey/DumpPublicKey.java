@@ -41,8 +41,8 @@ class DumpPublicKey {
      * @return version number of key.  Supported versions are:
      *     1: 2048-bit RSA key with e=3 and SHA-1 hash
      *     2: 2048-bit RSA key with e=65537 and SHA-1 hash
-     *     3: 2048-bit RSA key with e=3 and SHA-256 hash
-     *     4: 2048-bit RSA key with e=65537 and SHA-256 hash
+     *     3: 2048 or 8192-bit RSA key with e=3 and SHA-256 hash
+     *     4: 2048 or 8192-bit RSA key with e=65537 and SHA-256 hash
      * @throws Exception if the key has the wrong size or public exponent
      */
     static int checkRSA(RSAPublicKey key, boolean useSHA256) throws Exception {
@@ -59,8 +59,8 @@ class DumpPublicKey {
                                 pubexp.toString(10) + ".");
         }
 
-        if (modulus.bitLength() != 2048) {
-             throw new Exception("Modulus should be 2048 bits long but is " +
+        if (modulus.bitLength() != 2048 && modulus.bitLength() != 8192) {
+             throw new Exception("Modulus should be 2048 or 8192 bits long but is " +
                         modulus.bitLength() + " bits.");
         }
 
